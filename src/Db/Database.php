@@ -39,13 +39,6 @@ class Database {
         return $sth->fetchAll();
     }
 
-    public function queryWithParams($sql, $params) 
-    {
-        $this->conn = $this->conn->prepare($sql);
-        $this->conn->execute($params);
-        return $this->conn->fetchAll();
-    }
-
     public function close()
     {
         $this->conn = null;
