@@ -14,9 +14,19 @@ class Product extends Model {
 
     public function getAll()
     {
-        return $this->db->query(
+        return $this->db->fetch(
             'SELECT * FROM product'
         );
+    }
+
+    public function add($product, $stock, $price)
+    {
+        $sql = 'INSERT INTO 
+                    product(product, stock, price) 
+                VALUES(:product, :stock, :price)';
+        $params = [':product' => $product, ':stock' => $stock, ':price' => $price];
+        
+        return $this->db->insert($sql, $params);
     }
 
 }

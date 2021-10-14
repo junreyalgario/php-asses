@@ -9,9 +9,7 @@ require __DIR__.'/src/Helpers/helpers.php';
 define('CONFIG', $config);
 define('BASE_DIR', __DIR__);
 
-use SMS\Controllers\HomeCont;
+use SMS\Routing\Router;
 
-$home = new HomeCont();
-
-$home->loadHome();
-
+$router = new Router();
+$router->serve();

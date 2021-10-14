@@ -21,13 +21,8 @@ abstract class Model {
         $this->db->connect();
     }
 
-    // protected function query($query, $params)
-    // {
-    //     return $this->db->query();
-    // }
-
     public function __destruct()
     {
-        $this->db->close();
+        // $this->db->close();
     }
 }

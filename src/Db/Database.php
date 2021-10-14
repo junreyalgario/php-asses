@@ -33,20 +33,16 @@ class Database {
         }
     }
 
-    public function query($sql) 
+    public function fetch($sql) 
     {
         $sth = $this->conn->query($sql, PDO::FETCH_OBJ);
         return $sth->fetchAll();
     }
 
-    public function close()
+    public function insert($sql, $params)
     {
-        $this->conn = null;
-    }
-
-    public function __destruct() 
-    {
-        $this->conn = null;
+        $stmnt = $this->conn->prepare($sql)->execute($params);
+        return $this->conn->lastInsertId();
     }
 
 }
