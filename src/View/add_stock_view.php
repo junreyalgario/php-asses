@@ -37,11 +37,11 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Stock</label>
-                        <input type="text" class="form-control" id="stock" placeholder="Enter stock" name="stock" required>
+                        <input type="number" class="form-control" id="stock" placeholder="Enter stock" name="stock" required>
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" placeholder="Enter price" name="price" required>
+                        <input type="number" class="form-control" id="price" placeholder="Enter price" name="price" required>
                     </div>
                     <a href="/" class="btn btn-secondary">Back</a>
                     <button type="submit" class="btn btn-primary">Save</button>

@@ -45,4 +45,9 @@ class Database {
         return $this->conn->lastInsertId();
     }
 
+    public function query($sql, $params)
+    {
+        return $this->conn->prepare($sql)->execute($params);
+    }
+
 }

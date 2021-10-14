@@ -23,3 +23,16 @@ if (!function_exists('dd'))
         die();
     }
 }
+
+if (!function_exists('jsonResp'))
+{
+    function jsonResp($status, $code, $data, $msg)
+    {
+        echo json_encode([
+            "status" => $status,
+            "code" => $code,
+            "message" => $msg,
+            "data" => $data
+        ]);
+    }
+}

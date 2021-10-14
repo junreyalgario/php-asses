@@ -22,9 +22,36 @@ class Router {
 
         $query = isset($requestUri['query']) ? $requestUri['query'] : '';
 
-        // dd($requestUri);
+        // dd($_SERVER);
 
         if ($pathArr[1] == 'api') {
+
+            switch ($pathArr[2]) {
+                case 'product' :
+                    $prodCont = new ProductCont();
+
+                    if (count($pathArr) > 3) {
+                        
+                        switch($pathArr[3]) {
+                            case 'update':
+                                $prodCont->updateAPI($this->parseQuery($query));
+                                break;
+                            case 'sell':
+                                $prodCont->sellAPI($this->parseQuery($query));
+                                break;
+                            default:
+                                $this->apiError404();
+                                break;
+                        }
+
+                    }
+                
+                    break;
+
+                default:
+                    // $this->apiError404();
+                    break;
+            }
 
         } else {
             switch ($pathArr[1]) {
@@ -42,6 +69,15 @@ class Router {
                         switch($pathArr[2]) {
                             case 'add':
                                 $prodCont->add($this->parseQuery($query));
+                                break;
+                            case 'clear':
+                                $prodCont->clear();
+                                break;
+                            case 'sales':
+                                $prodCont->loadSalesView();
+                                break;
+                            default:
+                                $this->error404();
                                 break;
                         }
 
@@ -64,9 +100,18 @@ class Router {
         http_response_code(404);
         $errorCont->error404();
     }
+    private function apiError404()
+    {
+        echo json_encode([
+            "status" => false,
+            "code" => 404,
+            "message" => 'Error 404: Resource not found.'
+        ]);
+    }
 
     private function parseQuery($queryStr)
     {
-        return new Request($queryStr);
+        $postData = $_SERVER['REQUEST_METHOD'] == 'POST' ? json_decode(file_get_contents('php://input')) : null;
+        return new Request($queryStr, $postData);
     }
 }
